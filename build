@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sed -i "s|yolact|mtcnn_new|" CMakeLists.txt
+mkdir -p b && cd b
+cmake -DCMAKE_TOOLCHAIN_FILE=../../toolchains/pi3.toolchain.cmake -DPI3=ON ../..
+sed -i "s|-lpthread|-lopencv_videoio|" examples/CMakeFiles/mtcnn_new.dir/link.txt
+make -j4 mtcnn_new
